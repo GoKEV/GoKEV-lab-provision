@@ -13,8 +13,9 @@ Here's an example of how you could launch this role
 
 
 <pre>---
-- name: Back up a system with GoKEV-lab-provisioner
-  hosts: servers-to-backup
+- name: Build a VMware guest from template
+  hosts: localhost
+  gather_facts: no
 
   roles:
     - GoKEV.lab-provisioner
