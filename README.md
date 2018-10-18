@@ -2,7 +2,7 @@
 
 <div style="position: absolute; top: 40px; left: 200px;">
 
-# GoKEV-lab-provisioner
+# GoKEV-lab-provision
 
 This project is an Ansible role to deploy one or many EC2 instances for lab purposes
   - This role assumes you're feeding credentials through an Ansible Tower credential type
@@ -18,7 +18,7 @@ Here's an example of how you could launch this role
   gather_facts: no
 
   roles:
-    - GoKEV.lab-provisioner
+    - GoKEV.lab-provision
 
 </pre>
 
@@ -26,9 +26,9 @@ Here's an example of how you could launch this role
 
 <pre>
 ---
-- name: GoKEV.lab-provisioner
+- name: GoKEV.lab-provision
   version: master
-  src: https://github.com/GoKEV/GoKEV-lab-provisioner.git
+  src: https://github.com/GoKEV/GoKEV-lab-provision.git
 </pre>
 
 
