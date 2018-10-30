@@ -9,7 +9,8 @@ This project is an Ansible role to deploy one or many EC2 instances for lab purp
 <pre>
 ##      SOME OPTIONS FOR SIZING (MAY NOT BE CURRENT INFO):
 #
-#               vCPU    ECU     Memory          Storage (GB)		Ambiguous reference for Kev (not a reference for AWS EC2 pricing)
+#               vCPU    ECU     Memory          Storage (GB)		Ambiguous reference for Kev 
+#								    (not a reference for AWS EC2 pricing)
 #  t2.small     1       Var     2 GiB           EBS Only                0.023 units of ambiguity
 #  t2.medium    2       Var     4 GiB           EBS Only                0.0464 units of ambiguity
 #  t2.large     2       Var     8 GiB           EBS Only                0.0928 units of ambiguity
