@@ -1,0 +1,25 @@
+---
+# tasks file for GoKEV-lab-provision with ami-26ebbc5c t2.small
+- name: build the EC2 control node
+  ec2:
+    aws_access_key: "{{ user_awskey }}"
+    aws_secret_key: "{{ user_awssec }}"
+    key_name: "{{ user_sshkey }}"
+    instance_type: "{{ user_instype }}"
+    image: "{{ user_image }}"
+    wait: yes
+    group: "{{ user_secgrp }}"
+    count: 1
+    vpc_subnet_id: "{{ user_subnet }}"
+    assign_public_ip: yes
+    region: "{{ user_region }}"
+    instance_tags: "{{ user_tags }}"
+  register: newec2info
+  delegate_to: localhost
+  changed_when: False
+
+- name: Display newec2info public ip
+  debug:
+    msg: "New EC2 INFO {{ newec2info.instances[0].public_ip }}"
+  ignore_errors: true
+
