@@ -26,12 +26,12 @@
     msg: "INFO {{ newec2info.tagged_instances[0] }}"
   ignore_errors: true
 
-- name: Wait 300 seconds for port 22 to become open and contain "OpenSSH"
+- name: Wait 10 seconds and then check port 22 for 300 seconds
   wait_for:
     port: 22
     host: "{{ newec2info.tagged_instances[0].public_ip }}"
     search_regex: OpenSSH
-    delay: 30
+    delay: 10
   connection: local
 
 - name: "add {{ newec2info.tagged_instances[0].public_ip }} host to group newec2"
