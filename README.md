@@ -23,9 +23,13 @@ This project is an Ansible role to deploy one or many EC2 instances for lab purp
 #
 </pre>
 
-## Example Playbooks
-Here's an example of how you could launch this role
 
+## Here's an example of how you could launch this role:
+<pre>
+ansible-playbook -i ec2.hosts GoKEV-lab-provision.yml
+</pre>
+
+## Example Playbook called GoKEV-lab-provision.yml:
 
 <pre>
 ---
@@ -62,6 +66,16 @@ Here's an example of how you could launch this role
 
 </pre>
 
+## With an inventory file called ec2.hosts:
+<pre>
+[local]
+localhost
+
+[newec2:vars]
+ansible_user=ec2-user
+ansible_ssh_private_key_file=/path-to-my/aws/key-file.pem
+
+</pre>
 ## With a requirements.yml that looks as such:
 
 <pre>
