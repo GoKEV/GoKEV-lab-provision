@@ -12,7 +12,7 @@ This project is an Ansible role to deploy one or many EC2 instances for lab purp
 Here's an example of how you could launch this role
 
 
-<pre>---
+<pre>
 ---
 - name: Build an EC2 instance
   hosts: localhost
