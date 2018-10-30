@@ -5,8 +5,22 @@
 # GoKEV-lab-provision
 
 This project is an Ansible role to deploy one or many EC2 instances for lab purposes
-  - This role assumes you're feeding credentials through an Ansible Tower credential type
 
+<pre>
+##      SOME OPTIONS FOR SIZING (MAY NOT BE CURRENT INFO):
+#
+#               vCPU    ECU     Memory          Storage (GB)		Ambiguous reference for Kev (not a reference for AWS EC2 pricing)
+#  t2.small     1       Var     2 GiB           EBS Only                0.023 units of ambiguity
+#  t2.medium    2       Var     4 GiB           EBS Only                0.0464 units of ambiguity
+#  t2.large     2       Var     8 GiB           EBS Only                0.0928 units of ambiguity
+#  t2.xlarge    4       Var     16 GiB          EBS Only                0.1856 units of ambiguity
+#  t2.2xlarge   8       Var     32 GiB          EBS Only                0.3712 units of ambiguity
+#
+#  r5d.4xlarge  16      71      128 GiB         2 x 300 NVMe SSD        1.152 units of ambiguity
+#  r5.4xlarge   16      71      128 GiB         EBS Only                1.008 units of ambiguity
+#  r4.8xlarge   32      99      244 GiB         EBS Only                2.128 units of ambiguity
+#
+</pre>
 
 ## Example Playbooks
 Here's an example of how you could launch this role
@@ -19,6 +33,7 @@ Here's an example of how you could launch this role
   gather_facts: no
 
   vars:
+    user_srvname: GoKEV Server Name Field
     user_sshkey: my-private-key
     user_instype: t2.small
     user_image: ami-26ebbc5c
@@ -29,7 +44,7 @@ Here's an example of how you could launch this role
     user_awssec: abcdefghijklmnopqrstuvwxyz0123456789
     user_region: us-east-1
     user_tags:
-      Name: GoKEV EC2 Lab
+      Name: "{{ user_srvname }}"
       Event: Some Workshop Event
       Owner: GoKEV
       Contact: "kev@redhat.com"
@@ -42,6 +57,7 @@ Here's an example of how you could launch this role
   roles:
     - GoKEV-lab-installtower
     - GoKEV-lab-configtower
+    - GoKEV-lab-deck
 
 </pre>
 
@@ -60,6 +76,10 @@ Here's an example of how you could launch this role
 - name: GoKEV.lab-configtower
   version: master
   src: https://github.com/GoKEV/GoKEV-lab-configtower.git
+
+- name: GoKEV.lab-deck
+  version: master
+  src: https://github.com/GoKEV/GoKEV-lab-deck.git
 
 </pre>
 
