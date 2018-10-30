@@ -1,25 +1,41 @@
 ---
 # tasks file for GoKEV-lab-provision with ami-26ebbc5c t2.small
-- name: build the EC2 control node
-  ec2:
+
+- ec2:
     aws_access_key: "{{ user_awskey }}"
     aws_secret_key: "{{ user_awssec }}"
     key_name: "{{ user_sshkey }}"
+    group: "{{ user_secgrp }}"
     instance_type: "{{ user_instype }}"
     image: "{{ user_image }}"
     wait: yes
-    group: "{{ user_secgrp }}"
-    count: 1
+    wait_timeout: 600
     vpc_subnet_id: "{{ user_subnet }}"
     assign_public_ip: yes
     region: "{{ user_region }}"
     instance_tags: "{{ user_tags }}"
+    count_tag:
+      Name: "{{ user_srvname }}"
+    exact_count: 1
   register: newec2info
   delegate_to: localhost
   changed_when: False
 
-- name: Display newec2info public ip
+- name: Info about the EC2 instance
   debug:
-    msg: "New EC2 INFO {{ newec2info.instances[0].public_ip }}"
+    msg: "INFO {{ newec2info.tagged_instances[0] }}"
   ignore_errors: true
 
+- name: Wait 300 seconds for port 22 to become open and contain "OpenSSH"
+  wait_for:
+    port: 22
+    host: "{{ newec2info.tagged_instances[0].public_ip }}"
+    search_regex: OpenSSH
+    delay: 30
+  connection: local
+
+- name: "add {{ newec2info.tagged_instances[0].public_ip }} host to group newec2"
+  add_host:
+    name: "{{ newec2info.tagged_instances[0].public_ip }}"
+    groups: newec2
+  changed_when: False
