@@ -56,13 +56,13 @@ ansible-playbook -i ec2.hosts GoKEV-lab-provision.yml
       Application: AnsibleRED
 
   roles:
-    - GoKEV-lab-provision
+    - GoKEV.lab-provision
 
 - hosts: newec2
   roles:
-    - GoKEV-lab-installtower
-    - GoKEV-lab-configtower
-    - GoKEV-lab-deck
+    - GoKEV.lab-installtower
+    - GoKEV.lab-configtower
+    - GoKEV.lab-deck
 
 </pre>
 
