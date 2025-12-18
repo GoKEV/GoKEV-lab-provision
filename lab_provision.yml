@@ -1,0 +1,26 @@
+---
+- name: Build an EC2 instance
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    user_srvname: GoKEV Server Name Field
+    user_sshkey: my-private-key
+    user_instype: t2.small
+    user_image: ami-26ebbc5c
+    user_vpc: vpc-a12345678
+    user_subnet: subnet-12345678
+    user_secgrp: security-group-name
+    user_awskey: ABCDEFGHIJKLMNOPQRST
+    user_awssec: abcdefghijklmnopqrstuvwxyz0123456789
+    user_region: us-east-1
+    user_tags:
+      Name: "{{ user_srvname }}"
+      Event: Dynatrace Monitored App
+      Owner: GoKEV
+      Contact: "kev@redhat.com"
+      Application: AnsibleRED
+
+  roles:
+    - GoKEV.lab-provision
+
